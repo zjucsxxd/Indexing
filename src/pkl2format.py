@@ -4,6 +4,7 @@ import os
 import sys
 
 def main(pkl_name):
+    global count_index
     pkl_file = open(pkl_name, 'rb')
 
     lable, data = pickle.load(pkl_file).values()
@@ -26,11 +27,13 @@ def main(pkl_name):
 
         if count%100 == 0:
             print count
-        if total_count != -1 and count >= total_count:
+        if total_count != -1 and count_index >= total_count:
             break
 
         if lb[count] == 0:
             continue
+
+        count_index += 1
         for colum in row:
             value = '%f'%colum
             outStr = outStr + value + " "
@@ -56,16 +59,17 @@ if __name__ == '__main__':
     kind_count  = 150
     total_count = -1
     if len(sys.argv) == 5:
-        kind_count = sys.argv[4]
+        kind_count = int(sys.argv[4])
     if len(sys.argv) == 6:
-        total_count = sys.argv[5]
+        total_count = int(sys.argv[5])
     
 
-    count = 0
+    count_index = 0
     for f in os.listdir(fold):
-        count = count + 1
         #if count >= 40:
         #    break
+        if count_index >= total_count:
+            break
         print f
         main(fold + f)
 
