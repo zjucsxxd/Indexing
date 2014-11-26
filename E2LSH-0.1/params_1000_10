@@ -1,0 +1,23 @@
+1
+R
+145
+Success probability
+0.9
+Dimension
+4096
+R^2
+21025
+Use <u> functions
+0
+k
+10
+m [# independent tuples of LSH functions]
+1000
+L
+1000
+W
+4.000000000
+T
+191572
+typeHT
+3
