@@ -17,7 +17,7 @@ def getMark(filename, outfile):
             value = getValue(sys.argv[3], key)
             line = str(value[0:-1]) + "  " + line
         else:
-            line = "\n\n" # + line
+            line = "\n" # + line
         fo.write(line)
 
     
@@ -36,6 +36,7 @@ def getLineValue(line):
 
     return float(vStr)
 
+
 def calPrecious(filename):
     fi = open(filename, "rb")
 
@@ -46,32 +47,25 @@ def calPrecious(filename):
     kind = []
     value = -1
     for line in fi:
-        if flag == 0 and line[0] != '\n':
-            matchFlag = 0
-            flag = 1
-            count += 1
-            kind.append(getValue(sys.argv[4], count+1))
-            print "number " + str(count)+ ":  " + str(kind[count])
-
-            value = getLineValue(line)
-            if value  == kind[count]:
-                matchFlag = 1
-                print str(value)
-
-        elif flag == 1 and line[0] != '\n':
-            value = getLineValue(line)
-            if value  == kind[count]:
-                matchFlag = 1
-                print str(value)
-
-        elif flag == 1 and line[0] == '\n':
+        if flag ==0 and line[0] == '\n':
             if matchFlag == 0:
                 match.append(0)
             else:
                 match.append(1)
-
+            flag = 1
+            matchFlag = 0
+        elif flag == 1 and line[0] == '\n':
+            count += 1
+            kind.append(getValue(sys.argv[4], count+1))
+            print "number " + str(count)+ ":  " + str(kind[count])
             flag = 0
-            print "\n"
+
+        elif flag == 0 and line[0] != '\n':
+            value = getLineValue(line)
+            if value  == kind[count]:
+                matchFlag = 1
+                print str(value)
+
 
     t = 0.0
     for var in match:

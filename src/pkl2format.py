@@ -68,7 +68,7 @@ if __name__ == '__main__':
     for f in os.listdir(fold):
         #if count >= 40:
         #    break
-        if count_index >= total_count:
+        if total_count != -1 and count_index >= total_count:
             break
         print f
         main(fold + f)
